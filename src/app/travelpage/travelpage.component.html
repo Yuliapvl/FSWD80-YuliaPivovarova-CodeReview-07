@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-md-5">
+    <!-- We will build this form using ReactiveForm based on the
+property "form" inside customerservice.ts -->
+    <form [formGroup]="this.travelsectionService.form" (ngSubmit)="onSubmit()">
+    	<div class="alert alert-info" *ngIf="showSuccessMessage">
+submitted successfully.
+</div>
+      <input type="hidden" formControlName="$key">
+      <!-- this
+is a primary key for each record of customer and after that we can display the
+active form control-->
+
+      <div class="form-group">
+        <label>Destination</label>
+        <input formControlName="destination" class="form-control" placeholder="Enter desired destination" [ngClass]="{'is-invalid':submitted && formControls.destination.errors}">
+        <div class="invalid-feedback" *ngIf="submitted &&formControls.destination.errors">Invalid entry..</div>
+      </div>
+
+      <div class="form-group">
+        <label>Dates</label>
+        <input formControlName="dates" class="form-control" placeholder="Enter desired dates"[ngClass]="{'is-invalid':submitted && formControls.dates.errors}">
+        <div class="invalid-feedback" *ngIf="submitted &&formControls.dates.errors">Invalid entry..</div>
+      </div>
+
+
+      <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Preference</label>
+      <select formControlName="preferences" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+        <option selected>Choose...</option>
+        <option value="1">Mountain Trip</option>
+        <option value="2">Seaside Trip</option>
+        <option value="3">Urban trip</option>
+      </select>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  <div class="col-md-7">
+    <travel-list></travel-list>
+  </div>
+</div>

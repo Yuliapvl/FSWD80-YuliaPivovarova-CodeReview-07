@@ -1,0 +1,26 @@
+<form class="form-inline">
+  <input name="searchInput" class="formcontrol" placeholder="Search" #searchInput="ngModel" [(ngModel)]="searchText" style="width:
+80%;">
+  <button class="btn btn-outline-primary" (click)="searchText=''">x</button>
+</form>
+<table class="table table-sm">
+  <thead>
+    <th>Destination</th>
+    <th>Dates</th>
+    <th>Preference</th>
+    <th></th>
+  </thead>
+  <ng-container *ngFor="let travel of travelArray">
+    <tr class="table-dark" *ngIf="filterCondition(travel)">
+      <td>{{travel.destination}}</td>
+      <td>{{travel.dates}}</td>
+      <td>{{travel.preferences}}</td>
+      <td>
+        <button class="btn btninfo" (click)="travelsectionService.populateForm(travel)">Edit</button>
+        <button class="btn btndanger" (click)="onDelete(travel.$key)">Delete</button>
+      </td>
+    </tr>
+  </ng-container>
+</table>
+<div class="alert alert-danger" *ngIf="showDeletedMessage">Deleted
+  successfully</div>
